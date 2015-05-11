@@ -34,14 +34,15 @@
 		$results = json_decode($instagramInfo, true);
 
 		// echoing out userID
-		echo $results['data']['0']['id'];
+		return $results['data']['0']['id'];
 	}
 
 	// function to print out images on screen
-	function printImages(userID){
+	function printImages($userID){
 		$url = 'https://api.instagram.com/v1/users' .$userID. '/media/recent?client_id=' .clientID. '&count=5';
 		$instagramInfo = connectToInstagram($url);
 		$results = json_decode($instagramInfo, true);
+
 		//parse through the information one by one 
 		foreach ($results['data'] as $item) {
 			// going to go through all of my results and give myself back the url of those pictures because we want to save it in the PHP server
