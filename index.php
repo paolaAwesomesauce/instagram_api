@@ -20,7 +20,16 @@
 			'code' => $code
 			);
 	}
-
+// cURL is a library we use in PHP that calls on other API's
+	// setting a cURL session and we put in $url because thats where we are getting data from
+	$curl = curl_init($url);
+	curl_setopt($curl, CURLOPT_POST, true);
+	// setting the POSTFIELDS  to the arrat setup that we created
+	curl_setopt($curl, CURLOPT_POSTFIELDS, $access_token_settings);
+	// setting equal to bc we are getting strings back
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+	// but in live work-production we want to set this to true
+	curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 ?>
 
  <!DOCTYPE html>
