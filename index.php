@@ -20,23 +20,42 @@
 			CURLOPT_SSL_VERIFYPEER => 2,
 			));
 		$result = curl_exec($ch);
+		curl_close($ch);
 		return $result;
 	}
 
 	// function to get userID cause username doesnt allow us to get pics
 	function getUserID($userName){
-		$url = 'https:api.instagram.com/v1/users/search?q=' .$userName. '&client_id' .clientID;
+		// to get id
+		$url = 'https://api.instagram.com/v1/users/search?q=' .$userName. '&client_id' .clientID;
+		// connecting to instagram
 		$instagramInfo = connectToInstagram($url);
-		$result = json_decode($instagramInfo, true);
+		// creating a local variable to decode json information 
+		$results = json_decode($instagramInfo, true);
 
+		// echoing out userID
 		echo $results['data']['0']['id'];
+	}
+
+	// function to print out images on screen
+	function printImages(userID){
+		$url = 'https://api.instagram.com/v1/users' .$userID. '/media/recent?client_id=' .clientID. '&count=5';
+		$instagramInfo = connectToInstagram($url);
+		$results = json_decode($instagramInfo, true);
+		//parse through the information one by one 
+		foreach ($results['data'] as $item) {
+			// going to go through all of my results and give myself back the url of those pictures because we want to save it in the PHP server
+			$image_url = $items['images']['low_resolution']['url'];
+			echo '<img src="' .$image_url. ' "/><br/>';
+
+		}
 	}
 
 	if (isset($_GET['code'])) {
 		$code = ($_GET['code']);
-		$url = 'https:api.instagram/oauth/access_token';
+		$url = 'https://api.instagram/oauth/access_token';
 		$access_token_settings = array('client_id' => client_id,
-			'client_secret' => client_Secret,
+			'client_secret' => clientSecret,
 			'grant_type' => 'authorization_code',
 			'redirect_url' => redirectURL,
 			'code' => $code
@@ -56,8 +75,12 @@
 	$result = curl_exec($curl);
 	curl_close($curl);
 
-	$result = json_decode($result, true);
-	getUserID($results['user']['username']);
+	$results = json_decode($result, true);
+
+	$userName = $results['user']['username'];
+
+	$userID = getUserID($userName);
+	printImages($userID);
 	}
 	else{
 
