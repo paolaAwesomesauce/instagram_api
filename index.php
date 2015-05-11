@@ -49,8 +49,27 @@
 			$image_url = $items['images']['low_resolution']['url'];
 			echo '<img src="' .$image_url. ' "/><br/>';
 
+			// calling a function to save that $image_url
+			savePictures($images_url){
+
+			}
+
 		}
 	}
+
+	// function to save images to server 
+	function savePictures($image_url){
+		echo $image_url .'<br>';
+		// the filename is what we are storing. Basename is the PHP bult in the method that we ere using to store $image_url
+		$filename = basename($image_url);
+		echo $filename . '<br>';
+
+		// making sure that the image doesnt exist in the storage
+		$destination = ImageDirectory . $filename;
+		// goes and grabs an imagefile and stores it into our server 
+		file_put_contents($destionation, file_get_contents($image_url));
+	}
+
 
 	if (isset($_GET['code'])) {
 		$code = ($_GET['code']);
