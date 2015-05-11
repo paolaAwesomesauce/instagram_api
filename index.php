@@ -23,6 +23,15 @@
 		return $result;
 	}
 
+	// function to get userID cause username doesnt allow us to get pics
+	function getUserID($userName){
+		$url = 'https:api.instagram.com/v1/users/search?q=' .$userName. '&client_id' .clientID;
+		$instagramInfo = connectToInstagram($url);
+		$result = json_decode($instagramInfo, true);
+
+		echo $results['data']['0']['id'];
+	}
+
 	if (isset($_GET['code'])) {
 		$code = ($_GET['code']);
 		$url = 'https:api.instagram/oauth/access_token';
@@ -48,7 +57,7 @@
 	curl_close($curl);
 
 	$result = json_decode($result, true);
-	echo $results['user']['username'];
+	getUserID($results['user']['username']);
 	}
 	else{
 
