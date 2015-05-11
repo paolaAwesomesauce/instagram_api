@@ -19,6 +19,8 @@
 			CURLOPT_RETURNTRANSFER => false,
 			CURLOPT_SSL_VERIFYPEER => 2,
 			));
+		$result = curl_exec($ch);
+		return $result;
 	}
 
 	if (isset($_GET['code'])) {
