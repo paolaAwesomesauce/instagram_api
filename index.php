@@ -10,6 +10,17 @@
 	define('redirectURL', 'http://localhost:8888/appacademyapi/index.php');
 	define('ImageDirectory', 'pics/');
 
+	// function that is going to connet to insta
+	function connectToInstagram($url){
+		$ch = curl_init();
+
+		curl_setopt_array($ch, array(
+			CURLOPT_URL => $url,
+			CURLOPT_RETURNTRANSFER => false,
+			CURLOPT_SSL_VERIFYPEER => 2,
+			));
+	}
+
 	if (isset($_GET['code'])) {
 		$code = ($_GET['code']);
 		$url = 'https:api.instagram/oauth/access_token';
@@ -30,12 +41,16 @@
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 	// but in live work-production we want to set this to true
 	curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-	}
+	
 	$result = curl_exec($curl);
 	curl_close($curl);
 
 	$result = json_decode($result, true);
 	echo $results['user']['username'];
+	}
+	else{
+
+	}
 ?>
 
  <!DOCTYPE html>
