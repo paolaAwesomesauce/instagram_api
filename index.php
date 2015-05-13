@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">  -->
+  <!-- <meta name="viewport" content="width=device-width" /> -->
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+	<title></title>
+</head>
+<body>
+<!-- Header is linked to ligin, register and blog post -->
 <?php
 	// configuration for our php server 
 	set_time_limit(0);
@@ -5,9 +16,9 @@
 	session_start();
 
 	// make constants using defined 
-	define('clientID', 'c73d173254d844b89d8117954f97d9ee');
-	define('client_Secret', '971766cd8c4f4af7b7a6ff36f32b68b0');
-	define('redirectURL', 'http://localhost:8888/appacademyapi/index.php');
+	define('clientID', '100e0526196b4ef996c6f519ee1bd552');
+	define('clientSecret', '5b38bb2e201e4442a806252470c1d075');
+	define('redirectURI', 'http://localhost/paulaiscool/index.php');
 	define('ImageDirectory', 'pics/');
 
 	// function that is going to connet to insta
@@ -16,8 +27,9 @@
 
 		curl_setopt_array($ch, array(
 			CURLOPT_URL => $url,
-			CURLOPT_RETURNTRANSFER => false,
-			CURLOPT_SSL_VERIFYPEER => 2,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_SSL_VERIFYPEER => false,
+			CURLOPT_SSL_VERIFYHOST => 2,
 			));
 		$result = curl_exec($ch);
 		curl_close($ch);
@@ -27,15 +39,19 @@
 	// function to get userID cause username doesnt allow us to get pics
 	function getUserID($userName){
 		// to get id
-		$url = 'https://api.instagram.com/v1/users/search?q=' .$userName. '&client_id' .clientID;
+		$url = 'https://api.instagram.com/v1/users/search?q=' .$userName. '&client_id=' .clientID;
 		// connecting to instagram
+		//print_r($url);
+
 		$instagramInfo = connectToInstagram($url);
 		// creating a local variable to decode json information 
 		$results = json_decode($instagramInfo, true);
 
 		// echoing out userID
-		return $results['data']['0']['id'];
+		return $results['data'][0]['id'];
 	}
+
+
 
 	// function to print out images on screen
 	function printImages($userID){
@@ -46,14 +62,11 @@
 		//parse through the information one by one 
 		foreach ($results['data'] as $item) {
 			// going to go through all of my results and give myself back the url of those pictures because we want to save it in the PHP server
-			$image_url = $items['images']['low_resolution']['url'];
+			$image_url = $item['images']['low_resolution']['url'];
 			echo '<img src="' .$image_url. ' "/><br/>';
 
 			// calling a function to save that $image_url
-			savePictures($images_url){
-
-			}
-
+			savePictures($image_url);
 		}
 	}
 
@@ -67,19 +80,19 @@
 		// making sure that the image doesnt exist in the storage
 		$destination = ImageDirectory . $filename;
 		// goes and grabs an imagefile and stores it into our server 
-		file_put_contents($destionation, file_get_contents($image_url));
+		file_put_contents($destination, file_get_contents($image_url));
 	}
 
+	if (isset($_GET['code'])){
+	$code = $_GET['code'];
+	$url = 'https://api.instagram.com/oauth/access_token';
+	$access_token_settings = array('client_id' => clientID,
+		                           'client_secret' => clientSecret,
+		                           'grant_type' => 'authorization_code',
+		                           'redirect_uri' => redirectURI,
+		                           'code' => $code
+		                           );
 
-	if (isset($_GET['code'])) {
-		$code = ($_GET['code']);
-		$url = 'https://api.instagram/oauth/access_token';
-		$access_token_settings = array('client_id' => client_id,
-			'client_secret' => clientSecret,
-			'grant_type' => 'authorization_code',
-			'redirect_url' => redirectURL,
-			'code' => $code
-			);
 	
 // cURL is a library we use in PHP that calls on other API's
 	// setting a cURL session and we put in $url because thats where we are getting data from
@@ -101,24 +114,31 @@
 
 	$userID = getUserID($userName);
 	printImages($userID);
-	}
-	else{
 
-	}
+}
+	else{
 ?>
+</body>
+</html>
 
  <!DOCTYPE html>
 <html>
 <head>
 	<title></title>
+	<link rel="stylesheet" type="text/css" href="css/index.css"> 
 </head>
 <body>
+	  <div class="container">
 <!-- creating login for peple to go and give approvel for our web app to access their accoutn
 ater getting approval we are now going to have info -->
-	<a href="https:api.instagram/oauth/authorize/?client_id=<?php echo clientSID;?>
-	&redirec_url=<?php echo redirectURL;?>
+	<a href="https://api.instagram/oauth/authorize/?client_id=<?php echo clientID;?>
+	&redirect_uri=<?php echo redirectURI;?>
 	&response_type=code">LOGIN</a>
-
+	</div>
 	<script src="js/min.js"></script>
 </body>
 </html>
+
+<?php
+}
+?>

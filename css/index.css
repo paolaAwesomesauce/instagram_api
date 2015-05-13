@@ -1,0 +1,15 @@
+body{
+	font: normal 14px 'Open Sans', Arial, sans-serif;
+	color: #999;
+	background-image: url("http://www.freebiesgallery.com/wp-content/uploads/2014/04/geometric-background-3.jpg");
+	/*background-size: 100%;*/
+	/*background-repeat: no-repeat;*/
+}
+.container{
+	width: 900px;
+	height: 600px;
+	margin-top: 40px;
+	background: #f1f1f1;
+	text-align: center;
+	padding-top: 30px;
+}
