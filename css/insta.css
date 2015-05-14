@@ -1,0 +1,12 @@
+body{
+	color: #F0FFFF;
+	background-image: url("http://images.forwallpaper.com/files/images/5/5f74/5f747f86/218489/abstraction-geometry-shapes-colors.jpg");
+	background-attachment: fixed;
+    background-position: center; 
+}
+
+.body{
+	margin-left: 500px;
+	margin-bottom: 100px;
+	margin-top: 50px;
+}
