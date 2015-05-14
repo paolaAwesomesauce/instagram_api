@@ -126,9 +126,13 @@
 <head>
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="css/index.css"> 
+	<link href='http://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
 </head>
 <body>
 	  <div class="container">
+	  <p id="hi">
+	  	Hello
+	  </p>
 <!-- creating login for peple to go and give approvel for our web app to access their accoutn
 ater getting approval we are now going to have info -->
 	<a href="https://api.instagram/oauth/authorize/?client_id=<?php echo clientID;?>

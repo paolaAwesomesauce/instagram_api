@@ -1,15 +1,22 @@
 body{
-	font: normal 14px 'Open Sans', Arial, sans-serif;
-	color: #999;
-	background-image: url("http://www.freebiesgallery.com/wp-content/uploads/2014/04/geometric-background-3.jpg");
+	/*color: #999;*/
+	background-image: url("http://www.mimou.se/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/w/p/wp2110.jpg");
 	/*background-size: 100%;*/
 	/*background-repeat: no-repeat;*/
 }
 .container{
 	width: 900px;
-	height: 600px;
-	margin-top: 40px;
+	height: 500px;
+	margin-top: 50px;
+	margin-left: 250px;
 	background: #f1f1f1;
 	text-align: center;
-	padding-top: 30px;
+	padding-top: 10px;
+	opacity: 0.8;
+}
+
+#hi{
+	font-family: 'Play', sans-serif;
+	color: black;
+	font-size: 50px;
 }
