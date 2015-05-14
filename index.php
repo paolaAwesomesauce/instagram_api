@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <!-- <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">  -->
-  <!-- <meta name="viewport" content="width=device-width" /> -->
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
-	<title></title>
-</head>
-<body>
 <!-- Header is linked to ligin, register and blog post -->
 <?php
 	// configuration for our php server 
@@ -118,26 +108,25 @@
 }
 	else{
 ?>
-</body>
-</html>
+
 
  <!DOCTYPE html>
 <html>
 <head>
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="css/index.css"> 
-	<link href='http://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Wire+One' rel='stylesheet' type='text/css'>
 </head>
 <body>
 	  <div class="container">
 	  <p id="hi">
-	  	Hello
+	  	Instagram API
 	  </p>
 <!-- creating login for peple to go and give approvel for our web app to access their accoutn
 ater getting approval we are now going to have info -->
-	<a href="https://api.instagram/oauth/authorize/?client_id=<?php echo clientID;?>
+	<a href="https://api.instagram.com/oauth/authorize/?client_id=<?php echo clientID;?>
 	&redirect_uri=<?php echo redirectURI;?>
-	&response_type=code">LOGIN</a>
+	&response_type=code" id="link">LOGIN HERE</a>
 	</div>
 	<script src="js/min.js"></script>
 </body>
