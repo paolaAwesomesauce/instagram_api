@@ -27,6 +27,7 @@ function connectToInstagram($url)
 	$result  = curl_exec($ch);
 	curl_close($ch);
 	return $result;
+	
 }
 
 //Function to get userID because userName doesn't allow to get pictures.
@@ -36,32 +37,32 @@ function getUserID($userName){
 	$results = json_decode($instagramInfo, true);
 
 	return $results['data']['0']['id'];
-	echo '<head>
-		<link rel="stylesheet" type="text/css" href="css/insta.css"> 
-	 </head>';
+	
 }
 
 //Function to print out images onto screen
 function printImages($userID){
+	echo '<head>
+			<link rel="stylesheet" type="text/css" href="css/insta.css"> 
+	 	</head>';
+	 echo '<a href="index.php">GO HOME</a>';
 	$url = 'https://api.instagram.com/v1/users/' . $userID . '/media/recent?client_id='.clientID . '&count=5';
 	$instagramInfo = connectToInstagram($url);
 	$results = json_decode($instagramInfo, true);
-
 	//Parse through thet information one by one
 	foreach($results['data'] as $items)
 	 {
 	 	$image_url = $items['images']['low_resolution']['url']; //go through all of the results and give back the url of those pictures because we want to save it in the php server.
-	 	echo '<img src=" '. $image_url .' "/><br/>';
+	 	echo '<div class="pic"><img src=" '. $image_url .' "/><br/></div>';
 	 }
 
 	 // calling a function to save that $image_url
-			// savePictures($image_url);
+			savePictures($image_url);
 }
 
 // function to save images to server 
 	function savePictures($image_url){
-		echo '<body class="body">';
-		echo'<div id="picDiv">' .$image_url .'<br></div>';
+		echo'<div>' .$image_url .'<br></div>';
 		// the filename is what we are storing. Basename is the PHP bult in the method that we ere using to store $image_url
 		$filename = basename($image_url);
 		echo $filename . '<br>';
@@ -120,6 +121,7 @@ else{
 	<!-- creating login for peple to go and give approvel for our web app to access their accoutn
 	ater getting approval we are now going to have info -->
 	<a href="https://api.instagram.com/oauth/authorize/?client_id=<?php echo clientID; ?>&redirect_uri=<?php echo redirectURI; ?>&response_type=code">Login Here</a>
+
 	</div>
 	<script src="js/min.js"></script>
 </body>

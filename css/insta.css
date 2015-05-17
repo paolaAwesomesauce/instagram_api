@@ -1,12 +1,36 @@
 body{
 	color: #F0FFFF;
-	background-image: url("http://images.forwallpaper.com/files/images/5/5f74/5f747f86/218489/abstraction-geometry-shapes-colors.jpg");
+	background-image: url("http://img.archiexpo.com/images_ae/photo-g/geometric-patterned-wallpaper-design-color-outdoor-use-63746-3068071.jpg");
 	background-attachment: fixed;
     background-position: center; 
+    font-family: 'Wire One', sans-serif;
 }
 
-.body{
+.pic{
 	margin-left: 500px;
-	margin-bottom: 100px;
 	margin-top: 50px;
+	width: 400px;
+	height: 400px;
+	background: #f1f1f1;
+	text-align: center;
+	padding-top: 50px;
+}
+
+#hey{
+	width: 100%;
+	height: 200px;
+	background: #f1f1f1;
+	text-align: center;
+
+}
+
+a:link {
+    text-decoration: none;
+    font-family: 'Wire One', sans-serif;
+	color: purple;
+	font-size: 100px;
+}
+
+a:hover {
+    color: white;
 }
